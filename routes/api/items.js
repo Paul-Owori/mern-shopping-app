@@ -41,4 +41,17 @@ router.delete("/:id", (req, res) => {
     );
 });
 
+//@route    GET api/items
+//@desc     Get an item by id
+//@access   Public
+router.get("/:id", (req, res) => {
+  Item.findById(req.params.id)
+    .then(item => res.status(200).json(item))
+    .catch(err =>
+      res
+        .status(500)
+        .json({ message: "No item exists with that id", errorDetails: err })
+    );
+});
+
 module.exports = router;
